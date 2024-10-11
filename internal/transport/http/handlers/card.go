@@ -1,10 +1,10 @@
 package handlers
 
 import (
-	"card-validator/internal/pkg/validator"
 	"card-validator/internal/services"
 	"card-validator/internal/transport/http/request"
 	"card-validator/internal/transport/http/response"
+	"card-validator/pkg/validator"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
