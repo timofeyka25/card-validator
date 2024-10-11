@@ -9,7 +9,7 @@ import (
 
 type CardService struct{}
 
-func NewValidationService() *CardService {
+func NewCardService() *CardService {
 	return &CardService{}
 }
 
