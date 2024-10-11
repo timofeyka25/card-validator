@@ -20,7 +20,7 @@
 │   ├── entities                  # Domain entities
 │   ├── errs                      # Custom error handling
 │   ├── logger                    # Logging utility
-│   ├── pkg                       # Package for validation
+│   ├── pkg                       # Packages
 │   ├── repositories              # Data access layer
 │   ├── services                  # Business logic services
 │   └── transport                 # HTTP API layer
@@ -53,13 +53,13 @@ docker-compose up
 ```
 The server will be running at 
 ```url 
-http://localhost:8080
+http://localhost:8000
 ```
 
 ## API Documentation
 The API documentation is generated with Swagger and is available at:
 ```url
-http://localhost:8080/docs/swagger/index.html
+http://localhost:8000/docs/swagger/index.html
 ```
 To regenerate the Swagger docs:
 ```shell
