@@ -1,3 +1,7 @@
 package entities
 
-type Card struct{}
+type Card struct {
+	CardNumber      string
+	ExpirationMonth int
+	ExpirationYear  int
+}

@@ -1,0 +1,104 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a sample server.",
+        "title": "API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8000",
+    "basePath": "/",
+    "paths": {
+        "/card/validate": {
+            "post": {
+                "description": "Validates a credit card based on number, expiration month, and expiration year",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Card"
+                ],
+                "summary": "Validate a credit card",
+                "parameters": [
+                    {
+                        "description": "Card details to validate",
+                        "name": "card",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.CardRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Validation result",
+                        "schema": {
+                            "$ref": "#/definitions/response.CardResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "schema": {
+                            "$ref": "#/definitions/response.CardResponse"
+                        }
+                    },
+                    "422": {
+                        "description": "Parsing error",
+                        "schema": {
+                            "$ref": "#/definitions/response.CardResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "request.CardRequest": {
+            "type": "object",
+            "required": [
+                "card_number",
+                "expiration_month",
+                "expiration_year"
+            ],
+            "properties": {
+                "card_number": {
+                    "type": "string"
+                },
+                "expiration_month": {
+                    "type": "integer"
+                },
+                "expiration_year": {
+                    "type": "integer",
+                    "maximum": 9999,
+                    "minimum": 2021
+                }
+            }
+        },
+        "response.CardError": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "response.CardResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "$ref": "#/definitions/response.CardError"
+                },
+                "valid": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}

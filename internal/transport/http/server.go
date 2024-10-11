@@ -1,10 +1,13 @@
 package http
 
 import (
+	_ "card-validator/docs"
 	"context"
 	"errors"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"go.uber.org/fx"
 	"go.uber.org/zap"
 	"net/http"
@@ -16,6 +19,12 @@ type Server struct {
 	router *gin.Engine
 }
 
+// NewServer
+// @title           API
+// @version         1.0
+// @description     This is a sample server.
+// @host localhost:8000
+// @BasePath /
 func NewServer(cfg *Config, handlers []Handler) *Server {
 	router := gin.New()
 	router.Use(gin.Logger(), gin.Recovery())
@@ -36,6 +45,8 @@ func NewServer(cfg *Config, handlers []Handler) *Server {
 	for _, handler := range handlers {
 		handler.Register(api)
 	}
+
+	s.router.GET("/docs/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	return s
 }
